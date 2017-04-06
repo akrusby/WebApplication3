@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.IO;
+using WebApplication3.Models;
+using System.Net.Http;
 
 namespace WebApplication3.Controllers
 {
@@ -25,9 +32,20 @@ namespace WebApplication3.Controllers
 
 		// POST api/values
 		[HttpPost]
-		public IActionResult Post([FromBody]string value)
+		public IActionResult Post([FromBody] IncomingRequest value)
 		{
-			return new OkObjectResult("ce4df414");
+			var client = new HttpClient();
+			var response = client.PostAsync(@"https://api.vk.com/method/messages.send?message=" + 
+				"Ты сказал " + 
+				value.RequestObject.Body +
+				"&user_id=" +
+				value.RequestObject.UserId +
+				"&access_token=39ce2d2a6c3a8881f2ee610404213b2f560582cd8add52fa3e8ba7dd7770a942f191ac45b7d24b5bf6d37" +
+				"&v=5.0", null);
+
+			var responseString = response.Result.Content.ReadAsStringAsync();
+
+			return new OkObjectResult("ok");
 		}
 
 		// PUT api/values/5
