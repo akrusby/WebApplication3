@@ -3,4 +3,8 @@
 ################################################################################
 
 /MicrosoftAzure1/obj/Debug
+/src/WebApplication3/bin/Debug/netcoreapp1.0
+/.vs/WebApplication3/v14/.suo
+/.vs/config/applicationhost.config
+/src/WebApplication3/WebApplication3.xproj.user
 /src/WebApplication3/bin/Debug/netcoreapp1.0/nunit_random_seed.tmp
